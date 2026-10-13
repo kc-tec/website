@@ -48,7 +48,9 @@ export default function SiteHeader() {
       <header className="masthead">
         <div className="wrap">
           <Link className="brand" href="/">
-            <Image src="/logo.svg" alt="" width={54} height={54} priority />
+            {/* alt="" is deliberate: the college name sits beside it in the
+                same link, so announcing the logo too would be redundant. */}
+            <Image src="/logo.svg" alt="" width={60} height={60} priority />
             <span className="brand-text">
               <span className="brand-name">
                 <T
