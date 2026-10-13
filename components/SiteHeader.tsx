@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import T from "./T";
 import LanguageToggle from "./LanguageToggle";
-import { CONTACT, NAV_ITEMS } from "@/lib/site";
+import { CONTACT, NAV_ITEMS, withBase } from "@/lib/site";
 
 export default function SiteHeader() {
   const [navOpen, setNavOpen] = useState(false);
@@ -48,9 +48,12 @@ export default function SiteHeader() {
       <header className="masthead">
         <div className="wrap">
           <Link className="brand" href="/">
-            {/* alt="" is deliberate: the college name sits beside it in the
+            {/* withBase is required: next/image with unoptimized:true passes
+                src through verbatim and does NOT prefix basePath, so a bare
+                "/logo.svg" 404s once the site is served from a repo subpath.
+                alt="" is deliberate — the college name sits beside it in the
                 same link, so announcing the logo too would be redundant. */}
-            <Image src="/logo.svg" alt="" width={60} height={60} priority />
+            <Image src={withBase("/logo.svg")} alt="" width={60} height={60} priority />
             <span className="brand-text">
               <span className="brand-name">
                 <T

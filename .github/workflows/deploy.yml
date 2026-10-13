@@ -47,6 +47,13 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: npm run build
 
+      - name: Verify the export
+        # Fails the build on broken links or assets missing the base path
+        # prefix, rather than letting them 404 silently in production.
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: npm run verify
+
       - name: Upload the build output
         uses: actions/upload-pages-artifact@v3
         with:

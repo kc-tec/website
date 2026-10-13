@@ -73,6 +73,40 @@ for (const [file, label] of Object.entries(PAGES)) {
   }
 }
 
+// ---- Every absolute reference carries the base path ----
+// next/image with unoptimized:true does NOT prefix basePath, so a bare
+// "/logo.svg" silently 404s on a project site. Catch that here rather
+// than discovering it in production.
+if (process.env.NEXT_PUBLIC_BASE_PATH) {
+  console.log("\nBase path prefixing");
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
+  const unprefixed = new Set();
+
+  for (const file of Object.keys(PAGES)) {
+    const full = path.join(OUT, file);
+    if (!fs.existsSync(full)) continue;
+    const html = fs.readFileSync(full, "utf8");
+
+    for (const m of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
+      const url = m[1];
+      // Protocol-relative URLs and in-page anchors are not our concern.
+      if (url.startsWith("//") || url.startsWith("/#")) continue;
+      if (!url.startsWith(basePath + "/") && url !== basePath) {
+        unprefixed.add(url);
+      }
+    }
+  }
+
+  if (unprefixed.size) {
+    for (const url of unprefixed) {
+      console.log(`  ✗ ${url} — missing "${basePath}" prefix, will 404`);
+    }
+    failures++;
+  } else {
+    console.log(`  ✓ every absolute reference starts with "${basePath}"`);
+  }
+}
+
 // ---- Internal links resolve to real files ----
 console.log("\nInternal links");
 {
