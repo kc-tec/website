@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="KCTEC">
+  <title>KCTEC</title>
+  <!-- Placeholder crest. Swap this file for the college's official logo
+       (keep the same filename to update every page at once). -->
+  <path d="M32 2 58 10v26c0 14-11 22-26 26C17 58 6 50 6 36V10L32 2z" fill="#0b2545"/>
+  <path d="M32 7 53 13v23c0 11.5-9 18.4-21 21.8C20 54.4 11 47.5 11 36V13L32 7z" fill="none" stroke="#d9b85c" stroke-width="1.6"/>
+  <!-- Open book: teacher education -->
+  <path d="M18 27h12v15c-4-2.2-8-2.6-12-1.4V27z" fill="#d9b85c"/>
+  <path d="M34 27h12v13.6c-4-1.2-8-.8-12 1.4V27z" fill="#f8f1dc"/>
+  <path d="M32 25.5v17" stroke="#0b2545" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Star above the book -->
+  <path d="M32 13.5l2.1 4.5 4.9.6-3.6 3.3 1 4.8-4.4-2.4-4.4 2.4 1-4.8-3.6-3.3 4.9-.6 2.1-4.5z" fill="#d9b85c"/>
+</svg>
