@@ -40,18 +40,20 @@ jobs:
         run: npm ci
 
       - name: Build the static site
-        # A project site is served from https://<user>.github.io/<repo>/,
-        # so basePath must be the repo name. configure-pages works that
-        # out for us; it is empty for a <user>.github.io root site.
-        env:
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        # The site is published to the custom domain (see public/CNAME),
+        # which is served from the root, so asset paths must be root
+        # relative and no base path is applied.
+        #
+        # Do NOT set NEXT_PUBLIC_BASE_PATH from
+        # steps.pages.outputs.base_path: configure-pages reports "/<repo>"
+        # while GitHub still associates the repository with its project
+        # site, which bakes "/<repo>/_next/..." into the HTML and 404s
+        # every asset at the custom domain (the page loads with no CSS).
         run: npm run build
 
       - name: Verify the export
-        # Fails the build on broken links or assets missing the base path
-        # prefix, rather than letting them 404 silently in production.
-        env:
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        # Fails the build on broken links or unpaired bilingual text
+        # rather than letting problems reach production.
         run: npm run verify
 
       - name: Upload the build output
