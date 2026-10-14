@@ -74,8 +74,119 @@ afterwards your site is live at:
 https://<your-username>.github.io/<repository-name>/
 ```
 
-The workflow works out the base path automatically, so the site works whether
-it lives at a repository subpath or at a custom domain.
+## Using a custom domain
+
+The site is currently published at **www.kctec.site**. This section explains
+how that is set up and how to move it to a different domain without breaking
+the styling.
+
+### Why the styling breaks
+
+A static Next.js export writes absolute asset paths into every page, such as
+`/_next/static/chunks/....css` and `/logo.svg`. Those paths are correct only
+when the site is served from the **root** of a domain.
+
+GitHub Pages can serve a repository in two ways:
+
+| Where it is served | Asset paths must be |
+| --- | --- |
+| `https://<user>.github.io/<repo>/` | `/<repo>/_next/...` (a base path) |
+| `https://your-domain.com/` | `/_next/...` (root, no base path) |
+
+A single build can only contain one of those. If the HTML says
+`/website/_next/...` but the site is served at the root of your domain, every
+CSS and JavaScript request 404s. The page still loads — it just has no
+styling and no interactivity. That is the "text only, no style" symptom.
+
+### The rule this project follows
+
+**The site is always built for the root, with no base path.** The deploy
+workflow deliberately does *not* set `NEXT_PUBLIC_BASE_PATH`, so the export
+always contains root-relative paths. This is correct for a custom domain,
+which is how the site is published.
+
+Do not add this back to `.github/workflows/deploy.yml`:
+
+```yaml
+# WRONG for a custom domain — this is what breaks the styling.
+env:
+  NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+```
+
+`actions/configure-pages` reports `/website` for as long as GitHub still
+associates the repository with its project site, even after a custom domain
+is configured. Feeding that value into the build bakes `/website/_next/...`
+into the HTML and 404s every asset at the domain.
+
+### Moving to a different domain
+
+1. **Point the new domain at GitHub Pages.** At your registrar, create a
+   `CNAME` record for the hostname you want to use:
+
+   | Type | Host | Value |
+   | --- | --- | --- |
+   | `CNAME` | `www` (or your subdomain) | `<your-username>.github.io` |
+
+   For an apex domain (`example.com` with no `www`), use an `A` record
+   instead, pointing at GitHub's four addresses:
+
+   ```
+   185.199.108.153
+   185.199.109.153
+   185.199.110.153
+   185.199.111.153
+   ```
+
+2. **Update the CNAME file in the repository.** Edit `public/CNAME` so it
+   contains the new hostname and nothing else — no `https://`, no trailing
+   slash, no path:
+
+   ```
+   www.new-domain.com
+   ```
+
+   This file is what tells GitHub Pages which domain to serve. If it is
+   missing or wrong, the domain will not resolve to the site.
+
+3. **Set the custom domain in GitHub.** In the repository, go to
+   **Settings → Pages → Custom domain**, enter the new hostname, and save.
+   Wait for the DNS check to pass, then enable **Enforce HTTPS**.
+
+4. **Rebuild and deploy.** The build needs no changes — it is already
+   root-relative:
+
+   ```bash
+   npm run build
+   npm run verify
+   git add -A
+   git commit -m "Change custom domain to www.new-domain.com"
+   git push
+   ```
+
+5. **Wait for DNS.** New records take anywhere from a few minutes to a few
+   hours to propagate. Until then the old address may still answer.
+
+### Checking it worked
+
+Open the new domain and confirm the page is styled. If it is not, open your
+browser's developer tools (**F12** → **Network**) and reload. Look for
+requests to `_next/` or `logo.svg` returning **404**. If the failing paths
+start with a subpath such as `/website/`, the base path has crept back into
+the build — re-check step 2 of "The rule this project follows" above.
+
+You can also check what the deployed HTML references:
+
+```bash
+curl -s https://www.new-domain.com/ | grep -o '/[^"]*_next[^"]*' | head
+```
+
+Every path should start with `/_next/`, not `/<something>/_next/`.
+
+### Keeping the old address working
+
+Once the custom domain is set, `https://<user>.github.io/<repo>/` redirects to
+it automatically. You do not need to keep both working yourself, and you
+cannot serve both from one build anyway — the asset paths differ.
 
 ## Updating the live site
 
