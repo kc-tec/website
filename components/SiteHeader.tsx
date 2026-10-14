@@ -61,10 +61,12 @@ export default function SiteHeader() {
                   en="Kampong Cham Teacher Education College"
                 />
               </span>
+			  
               <span className="brand-sub">
                 <T
-                  km="ក្រសួងអប់រំ យុវជន និងកីឡា"
-                  en="Ministry of Education, Youth and Sport"
+                  km=""
+                  en=""
+				  
                 />
               </span>
             </span>
