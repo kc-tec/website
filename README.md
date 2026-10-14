@@ -77,6 +77,65 @@ https://<your-username>.github.io/<repository-name>/
 The workflow works out the base path automatically, so the site works whether
 it lives at a repository subpath or at a custom domain.
 
+## Updating the live site
+
+The live site is built from the `main` branch on GitHub. Nothing you change on
+your computer reaches the internet until you **commit** it and **push** it.
+Editing files alone is not enough.
+
+The full cycle, from the project folder:
+
+```bash
+npm run dev        # 1. preview your changes at http://localhost:3000
+npm run build      # 2. build the static site into out/
+npm run verify     # 3. check pages, links, and Pages requirements
+npm run typecheck  # 4. check for TypeScript errors
+```
+
+Then publish:
+
+```bash
+git add -A
+git commit -m "Describe what you changed"
+git push
+```
+
+That is the whole update. Pushing to `main` triggers the deploy workflow, which
+rebuilds the site and republishes it. The new version is live a couple of
+minutes later — you can watch the run in the repository's **Actions** tab.
+
+### Checking that the push worked
+
+```bash
+git status         # should say "nothing to commit, working tree clean"
+git log --oneline -3
+```
+
+If `git status` still lists changed files, the push did not include them.
+
+### If the push is rejected
+
+If `git push` is refused because the remote has commits you do not have (for
+example you edited on github.com in the meantime), pull first, then push:
+
+```bash
+git pull --rebase
+git push
+```
+
+### If you edited on GitHub instead
+
+You can also edit files directly on github.com and commit there. That push
+counts too, so the site rebuilds. Afterwards run `git pull` on your computer
+so the two copies do not drift apart.
+
+### Things that do not need a push
+
+`out/`, `.next/`, and `node_modules/` are build output and are ignored by git
+(see `.gitignore`). Deleting or rebuilding them locally changes nothing online.
+Only the source files — `app/`, `components/`, `lib/`, `public/`, and the
+config files — are what gets deployed.
+
 ## Checking your work before deploying
 
 ```bash
