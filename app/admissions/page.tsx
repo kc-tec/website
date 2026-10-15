@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import T, { TBlock } from "@/components/T";
 import PageBanner from "@/components/PageBanner";
+import Photo from "@/components/Photo";
 
 export const metadata: Metadata = {
   title: "ការចុះឈ្មោះ / Admissions",
@@ -111,6 +112,13 @@ export default function AdmissionsPage() {
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
+          {/* Replace public/images/admissions.png with your own photo. */}
+          <Photo
+            name="admissions.png"
+            altKm="និស្សិតកំពុងស្កែនឈ្មោះនៅថ្ងៃចុះឈ្មោះ"
+            altEn="Students checking the admissions register"
+            className="photo photo-side"
+          />
           <div className="grid grid-2">
             <div>
               <h2>

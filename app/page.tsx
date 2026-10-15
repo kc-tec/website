@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import T, { TBlock } from "@/components/T";
 import NewsList from "@/components/NewsList";
+import Photo from "@/components/Photo";
 import { NEWS } from "@/lib/news";
 
 /* PLACEHOLDER: replace the "—" values with the college's real figures. */
@@ -16,6 +17,9 @@ const QUICK_LINKS = [
   {
     href: "/programs",
     icon: "B.Ed",
+    img: "programs.png",
+    altKm: "និស្សិតកំពុងចូលរួមវគ្គបណ្តុះបណ្តាល",
+    altEn: "Students taking part in a training session",
     titleKm: "កម្មវិធីសិក្សា",
     titleEn: "Our programs",
     bodyKm: "បរិញ្ញាបត្រអប់រំ សម្រាប់បឋមសិក្សា និងមធ្យមសិក្សាបឋមភូមិ។",
@@ -24,6 +28,9 @@ const QUICK_LINKS = [
   {
     href: "/admissions",
     icon: "✓",
+    img: "admissions.png",
+    altKm: "ការស្វាគមន៍និស្សិតថ្មីនៅពេលចុះឈ្មោះ",
+    altEn: "Welcoming new students at registration",
     titleKm: "លក្ខខណ្ឌចូលរៀន",
     titleEn: "Entry requirements",
     bodyKm: "តម្រូវការ ឯកសារ និងកាលបរិច្ឆេទសំខាន់ៗសម្រាប់បេក្ខជន។",
@@ -32,6 +39,9 @@ const QUICK_LINKS = [
   {
     href: "/contact",
     icon: "◎",
+    img: "contact.png",
+    altKm: "ច្រកចូលបរិវេណវិទ្យាស្ថាន",
+    altEn: "The entrance to the college campus",
     titleKm: "ទីតាំង និងទំនាក់ទំនង",
     titleEn: "Visit & contact",
     bodyKm: "ទីតាំងបរិវេណ ម៉ោងធ្វើការ និងព័ត៌មានទំនាក់ទំនង។",
@@ -68,6 +78,14 @@ export default function HomePage() {
               <T km="មើលកម្មវិធីសិក្សា" en="Explore programs" />
             </Link>
           </div>
+
+          {/* Replace public/images/hero.png with your own photo. */}
+          <Photo
+            name="hero.png"
+            altKm="អគារសំខាន់នៃវិទ្យាស្ថានគរុកោសល្យកំពង់ចាម"
+            altEn="The main building of Kampong Cham Teacher Education College"
+            className="photo photo-hero"
+          />
         </div>
       </section>
 
@@ -77,6 +95,12 @@ export default function HomePage() {
           <div className="grid grid-3">
             {QUICK_LINKS.map((card) => (
               <Link className="card card-link" href={card.href} key={card.href}>
+                <Photo
+                  name={card.img}
+                  altKm={card.altKm}
+                  altEn={card.altEn}
+                  className="photo photo-card"
+                />
                 <div className="card-icon" aria-hidden="true">
                   {card.icon}
                 </div>

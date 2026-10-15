@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import T from "./T";
+import Photo from "./Photo";
 
 /*
  * The heading strip at the top of every inner page, with a breadcrumb
@@ -11,11 +12,19 @@ export default function PageBanner({
   titleEn,
   introKm,
   introEn,
+  img,
+  altKm,
+  altEn,
 }: {
   titleKm: string;
   titleEn: string;
   introKm: string;
   introEn: string;
+  /* Optional photo file name inside public/images, e.g. "programs.png".
+     Omit these three to render a plain text banner. */
+  img?: string;
+  altKm?: string;
+  altEn?: string;
 }) {
   return (
     <section className="page-banner">
@@ -34,6 +43,17 @@ export default function PageBanner({
           <T km={introKm} en={introEn} />
         </p>
       </div>
+
+      {img ? (
+        <div className="wrap">
+          <Photo
+            name={img}
+            altKm={altKm ?? ""}
+            altEn={altEn ?? ""}
+            className="photo photo-hero"
+          />
+        </div>
+      ) : null}
     </section>
   );
 }

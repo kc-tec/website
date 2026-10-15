@@ -12,15 +12,23 @@
    ============================================================= */
 
 :root {
-  /* Brand palette */
+  /* Brand palette 
   --navy-900: #0b2545;
   --navy-800: #13315c;
   --navy-700: #1b4079;
   --navy-100: #e8eef7;
-  /*--gold-500: #b8902f;*/
-  --gold-500: #fdb825;
+  --gold-500: #b8902f;
   --gold-400: #d9b85c;
-  --gold-100: #f8f1dc;
+  --gold-100: #f8f1dc; */
+  
+    /* Brand palette */
+  --navy-900: #004487;
+  --navy-800: #0056AB;
+  --navy-700: #0068CE;
+  --navy-100: #EBF1FA;
+  --gold-500: #FDB825;
+  --gold-400: #FFC445;
+  --gold-100: #FFF9E8;
 
   /* Neutrals */
   --ink: #1b1f24;
@@ -82,7 +90,7 @@ html[data-lang="km"] h2,
 html[data-lang="km"] h3,
 html[data-lang="km"] h4 { line-height: 1.6; }
 
-h1 { font-size: clamp(1.75rem, 1.1rem + 2.4vw, 2.75rem); }
+h1 { font-size: clamp(1.75rem, 1.1rem + 1.4vw, 2.75rem); }
 h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem); }
 h3 { font-size: 1.175rem; }
 p  { margin: 0 0 1rem; }
@@ -307,6 +315,46 @@ html[data-lang="km"] .hero-eyebrow { letter-spacing: normal; text-transform: non
 }
 .stat-label { font-size: .875rem; color: var(--ink-muted); }
 
+/* ---------- Photos ---------- */
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  background: var(--navy-100);
+}
+
+.photo-hero {
+  aspect-ratio: 16 / 9;
+  max-height: 420px;
+  margin-top: 2rem;
+  border: 1px solid rgba(255, 255, 255, .25);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo-side { aspect-ratio: 3 / 2; }
+
+.photo-card {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin: -1.5rem -1.5rem 1.25rem;
+  width: calc(100% + 3rem);
+  max-width: none;
+}
+
+/* Campus life gallery: three columns on desktop, reusing .grid gap. */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gallery .photo { aspect-ratio: 4 / 3; height: 100%; }
+
 /* Notice / placeholder callout */
 .notice {
   border-left: 4px solid var(--gold-500);
@@ -443,6 +491,7 @@ main { flex: 1 0 auto; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 760px) {
@@ -464,7 +513,7 @@ main { flex: 1 0 auto; }
 }
 
 @media (max-width: 620px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4, .gallery { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .hero-actions .btn { width: 100%; }
   .news-item { gap: .9rem; }

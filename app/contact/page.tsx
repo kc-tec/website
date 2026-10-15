@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import T, { TBlock } from "@/components/T";
 import PageBanner from "@/components/PageBanner";
 import ContactForm from "@/components/ContactForm";
+import Photo from "@/components/Photo";
 import { CONTACT } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -50,7 +51,13 @@ export default function ContactPage() {
           <div className="grid grid-2">
             {/* ---------- Contact details ---------- */}
             <div>
-              <h2>
+              <Photo
+                name="contact.png"
+                altKm="អគារការិយាល័យរបស់វិទ្យាស្ថាន"
+                altEn="The college administration building"
+                className="photo photo-side"
+              />
+              <h2 style={{ marginTop: "1.75rem" }}>
                 <T km="ព័ត៌មានទំនាក់ទំនង" en="Contact details" />
               </h2>
               <dl className="detail-list">

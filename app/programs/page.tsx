@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import T, { TBlock } from "@/components/T";
 import PageBanner from "@/components/PageBanner";
+import Photo from "@/components/Photo";
 
 export const metadata: Metadata = {
   title: "កម្មវិធីសិក្សា / Programs",
@@ -112,7 +113,15 @@ export default function ProgramsPage() {
             </p>
           </div>
 
-          <div className="grid grid-2">
+          {/* Replace public/images/programs.png with your own photo. */}
+          <Photo
+            name="programs.png"
+            altKm="និស្សិតកំពុងរៀនក្នុងថ្នាក់"
+            altEn="Student teachers in a lecture room"
+            className="photo photo-side"
+          />
+
+          <div className="grid grid-2" style={{ marginTop: "1.5rem" }}>
             {DEGREES.map((d) => (
               <article className="card" key={d.titleEn}>
                 <div className="card-icon" aria-hidden="true">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import T, { TBlock } from "@/components/T";
 import PageBanner from "@/components/PageBanner";
+import Photo from "@/components/Photo";
 
 export const metadata: Metadata = {
   title: "អំពីយើង / About",
@@ -28,6 +29,16 @@ const VALUES = [
     descKm: "គ្រូបង្រៀនជាគំរូសម្រាប់សិស្ស និងសហគមន៍។",
     descEn: "Teachers as role models for their students and communities.",
   },
+];
+
+/* Campus life gallery. Replace the files in public/images to use real photos. */
+const GALLERY = [
+  { img: "campus-life-1.png", altKm: "បណ្ណាល័យគ្រូបង្រៀន", altEn: "The teaching library" },
+  { img: "campus-life-2.png", altKm: "មន្ទីរពិសោធន៍", altEn: "The science laboratory" },
+  { img: "campus-life-3.png", altKm: "ការហាត់ល្បាក់", altEn: "Physical education on the field" },
+  { img: "campus-life-4.png", altKm: "បុណ្យវិស័យសិល្បៈ", altEn: "The annual arts festival" },
+  { img: "campus-life-5.png", altKm: "និស្សិតកំពុងសិក្សាតាមមេ", altEn: "Student teachers in class" },
+  { img: "campus-life-6.png", altKm: "ពិធីបុណ្យបញ្ចប់ការសិក្សា", altEn: "The graduation ceremony" },
 ];
 
 const HISTORY = [
@@ -80,6 +91,14 @@ export default function AboutPage() {
                   en="We work closely with local schools so that student teachers gain real classroom experience from early in their studies, not only at the end."
                 />
               </p>
+
+              {/* Replace public/images/campus.png with your own photo. */}
+              <Photo
+                name="campus.png"
+                altKm="បរិវេណវិទ្យាស្ថានគរុកោសល្យកំពង់ចាម"
+                altEn="The campus of Kampong Cham Teacher Education College"
+                className="photo photo-side"
+              />
             </div>
 
             <div>
@@ -149,6 +168,30 @@ export default function AboutPage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* ---------- Campus life ---------- */}
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <h2>
+              <T km="ជីវិតនៅក្នុងបរិវេណ" en="Life on campus" />
+            </h2>
+          </div>
+
+          <ul className="gallery">
+            {GALLERY.map((item) => (
+              <li key={item.img}>
+                <Photo
+                  name={item.img}
+                  altKm={item.altKm}
+                  altEn={item.altEn}
+                  className="photo"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>
