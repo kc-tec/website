@@ -15,8 +15,6 @@ const PAGES = {
   "index.html": "Home",
   "about/index.html": "About",
   "programs/index.html": "Programs",
-  "admissions/index.html": "Admissions",
-  "news/index.html": "News",
   "contact/index.html": "Contact",
 };
 

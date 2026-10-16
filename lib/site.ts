@@ -36,8 +36,7 @@ export type NavItem = {
 export const NAV_ITEMS: NavItem[] = [
   { href: "/", km: "ទំព័រដើម", en: "Home" },
   { href: "/about", km: "អំពីយើង", en: "About" },
+  { href: "/departments", km: "ផ្នែកវិជ្ជាជីវៈ", en: "Departments" },
   { href: "/programs", km: "កម្មវិធីសិក្សា", en: "Programs" },
-  { href: "/admissions", km: "ការចុះឈ្មោះ", en: "Admissions" },
-  { href: "/news", km: "ព័ត៌មាន", en: "News" },
   { href: "/contact", km: "ទំនាក់ទំនង", en: "Contact" },
 ];

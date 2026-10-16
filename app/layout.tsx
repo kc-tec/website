@@ -47,7 +47,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="km" data-lang="km" className={`${inter.variable} ${notoSansKhmer.variable}`}>
+    /*
+     * suppressHydrationWarning: LANG_INIT above rewrites lang/data-lang
+     * from localStorage before React hydrates, so an English reader's DOM
+     * deliberately differs from the server-rendered "km". React must not
+     * try to reconcile those two attributes.
+     */
+    <html
+      lang="km"
+      data-lang="km"
+      className={`${inter.variable} ${notoSansKhmer.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: LANG_INIT }} />
       </head>

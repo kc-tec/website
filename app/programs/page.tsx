@@ -225,8 +225,8 @@ export default function ProgramsPage() {
                   en="Check the entry requirements, required documents, and key dates."
                 />
               </p>
-              <Link className="btn btn-primary" href="/admissions">
-                <T km="ទៅកាន់ទំព័រចុះឈ្មោះ" en="Go to admissions" />
+              <Link className="btn btn-primary" href="/contact">
+                <T km="ទាក់ទងមកយើង" en="Contact us" />
               </Link>
             </div>
           </div>

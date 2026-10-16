@@ -1,23 +1,21 @@
 import Link from "next/link";
 
 import T, { TBlock } from "@/components/T";
-import NewsList from "@/components/NewsList";
 import Photo from "@/components/Photo";
-import { NEWS } from "@/lib/news";
 
 /* PLACEHOLDER: replace the "—" values with the college's real figures. */
 const STATS = [
   { value: "4", km: "ឆ្នាំសិក្សា (បរិញ្ញាបត្រ)", en: "Year degree program" },
-  { value: "—", km: "និស្សិតសរុប", en: "Students enrolled" },
-  { value: "—", km: "គ្រូបង្រៀន", en: "Teacher educators" },
-  { value: "—", km: "និស្សិតបានបញ្ចប់ការសិក្សា", en: "Graduates to date" },
+  { value: "1,500", km: "និស្សិតសរុប", en: "Students enrolled" },
+  { value: "60", km: "គ្រូបង្រៀន", en: "Teacher educators" },
+  { value: "1,500", km: "និស្សិតបានបញ្ចប់ការសិក្សា", en: "Graduates to date" },
 ];
 
 const QUICK_LINKS = [
   {
-    href: "/programs",
+    href: "/departments/math-science",
     icon: "🔬",
-    img: "programs.png",
+    img: "dept-math-science.png",
     altKm: "និស្សិតកំពុងចូលរួមវគ្គបណ្តុះបណ្តាល",
     altEn: "Students taking part in a training session",
     titleKm: "ផ្នែក​គណិតវិទ្យា និងវិទ្យាសាស្ត្រ",
@@ -26,9 +24,9 @@ const QUICK_LINKS = [
     bodyEn: "Responsible for coordinating and advancing academic programs in mathematics and natural sciences (Physics, Chemistry, Biology, and Earth Science). This unit focuses on innovative pedagogical practices, laboratory experimentation, and strengthening STEM education to prepare competent educators for modern classrooms.",
   },
   {
-    href: "/admissions",
+    href: "/departments/languages-social",
     icon: "📖",
-    img: "admissions.png",
+    img: "dept-languages-social.png",
     altKm: "ការស្វាគមន៍និស្សិតថ្មីនៅពេលចុះឈ្មោះ",
     altEn: "Welcoming new students at registration",
     titleKm: "ផ្នែកភាសា និងវិទ្យាសាស្ត្រសង្គម",
@@ -37,9 +35,9 @@ const QUICK_LINKS = [
     bodyEn: "Oversees instruction in linguistic development (Khmer and Foreign Languages) and social sciences (History, Geography, and Civics/Moral Education). The unit emphasizes communicative competence, critical literacy, cultural understanding, and civic values essential for future educators.",
   },
   {
-    href: "/contact",
+    href: "/departments/digital-tech",
     icon: "🌐",
-    img: "contact.png",
+    img: "dept-digital-tech.png",
     altKm: "ច្រកចូលបរិវេណវិទ្យាស្ថាន",
     altEn: "The entrance to the college campus",
     titleKm: "ផ្នែក​បច្ចេកវិទ្យាឌីជីថល ស្រាវជ្រាវ និងបណ្ណាល័យ",
@@ -54,7 +52,8 @@ export default function HomePage() {
     <>
       {/* ---------- Hero ---------- */}
       <section className="hero">
-        <div className="wrap">
+        <div className="wrap hero-grid">
+          <div className="hero-content">
           <span className="hero-eyebrow">
             <T km="បណ្តុះបណ្តាលគ្រូបង្រៀន" en="Teacher Education" />
           </span>
@@ -71,21 +70,25 @@ export default function HomePage() {
             />
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-primary" href="/admissions">
-              <T km="ដំណើរការចុះឈ្មោះ" en="How to apply" />
+            <Link className="btn btn-primary" href="/contact">
+              <T km="ទាក់ទងមកយើង" en="Contact us" />
             </Link>
             <Link className="btn btn-ghost" href="/programs">
               <T km="មើលកម្មវិធីសិក្សា" en="Explore programs" />
             </Link>
           </div>
 
-          {/* Replace public/images/hero.png with your own photo. */}
-          <Photo
-            name="hero.png"
-            altKm="អគារសំខាន់នៃវិទ្យាស្ថានគរុកោសល្យកំពង់ចាម"
-            altEn="The main building of Kampong Cham Teacher Education College"
-            className="photo photo-hero"
-          />
+          </div>
+
+          <div className="hero-image">
+            {/* Replace public/images/hero.png with your own photo. */}
+            <Photo
+              name="hero.png"
+              altKm="អគារសំខាន់នៃវិទ្យាស្ថានគរុកោសល្យកំពង់ចាម"
+              altEn="The main building of Kampong Cham Teacher Education College"
+              className="photo photo-hero"
+            />
+          </div>
         </div>
       </section>
 
@@ -200,13 +203,22 @@ export default function HomePage() {
 
             <div className="card">
               <h3>
-                <T km="ព័ត៌មានថ្មីៗ" en="Latest news" />
+                <T km="តើអ្នកចង់ដឹងបន្ថែមទេ?" en="Want to learn more?" />
               </h3>
-              {/* Pulls the two newest items from lib/news.ts. */}
-              <NewsList items={NEWS.slice(0, 2)} showCategory={false} />
-              <p style={{ marginTop: "1rem" }}>
-                <Link href="/news">
-                  <T km="មើលព័ត៌មានទាំងអស់ →" en="View all news →" />
+              <p>
+                <T
+                  km="ស្វែងយល់បន្ថែមអំពីកម្មវិធីសិក្សា ផ្នែកវិជ្ជាជីវៈ និងរបៀបទាក់ទងមកយើង។"
+                  en="Explore our academic programs, departments, and ways to get in touch."
+                />
+              </p>
+              <p>
+                <Link className="btn btn-primary" href="/programs">
+                  <T km="កម្មវិធីសិក្សា" en="Programs" />
+                </Link>
+              </p>
+              <p style={{ marginBottom: 0 }}>
+                <Link href="/contact">
+                  <T km="ទំនាក់ទំនង →" en="Contact us →" />
                 </Link>
               </p>
             </div>

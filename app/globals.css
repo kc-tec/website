@@ -71,7 +71,7 @@ body {
 /* Khmer needs more vertical breathing room than Latin script. */
 html[data-lang="km"] body {
   font-family: var(--font-khmer);
-  line-height: 1.95;
+  line-height: 1.85;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -90,10 +90,10 @@ html[data-lang="km"] h2,
 html[data-lang="km"] h3,
 html[data-lang="km"] h4 { line-height: 1.6; }
 
-h1 { font-size: clamp(1.75rem, 1.1rem + 1.4vw, 2.75rem); }
-h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem); }
-h3 { font-size: 1.175rem; }
-p  { margin: 0 0 1rem; }
+h1 { font-size: clamp(1.65rem, 1rem + 1.3vw, 2.5rem); }
+h2 { font-size: clamp(1.3rem, 1rem + 1.1vw, 1.85rem); }
+h3 { font-size: 1.125rem; }
+p  { margin: 0 0 0.85rem; }
 
 /* Visible focus for keyboard users — do not remove. */
 :focus-visible {
@@ -109,7 +109,7 @@ html[data-lang="en"] [data-lang="km"] { display: none !important; }
 
 /* ---------- Helpers ---------- */
 
-.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 1.25rem; }
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 1rem; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
@@ -167,7 +167,7 @@ html[data-lang="en"] [data-lang="km"] { display: none !important; }
 }
 
 .brand { display: flex; align-items: center; gap: .85rem; text-decoration: none; }
-.brand img { width: 70px; height: 70px; flex: none; }
+.brand img { width: 60px; height: 60px; flex: none; }
 .brand-text { display: flex; flex-direction: column; }
 .brand-name {
   font-weight: 700; color: var(--navy-900);
@@ -236,7 +236,19 @@ html[data-lang="en"] [data-lang="km"] { display: none !important; }
     linear-gradient(135deg, rgba(11, 37, 69, .93) 0%, rgba(27, 64, 121, .88) 100%),
     var(--navy-800);
   color: #fff;
-  padding: clamp(2.75rem, 1.5rem + 6vw, 5.5rem) 0;
+  padding: clamp(1.0rem, 1.5rem + 6vw, 2.0rem) 0;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
 }
 .hero h1 { color: #fff; max-width: 24ch; }
 .hero p {
@@ -460,7 +472,7 @@ html[data-lang="km"] .hero-eyebrow { letter-spacing: normal; text-transform: non
 
 .site-footer {
   background: var(--navy-900); color: #b9c9de;
-  padding: 2.75rem 0 0; margin-top: auto;
+  padding: 2rem 0 0; margin-top: auto;
   font-size: .9375rem;
 }
 .site-footer h4 {
