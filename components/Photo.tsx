@@ -21,6 +21,8 @@ type PhotoProps = {
   className?: string;
   /** Set false for purely decorative images. */
   decorative?: boolean;
+  /** Inline styles. */
+  style?: React.CSSProperties;
 };
 
 export default function Photo({
@@ -29,6 +31,7 @@ export default function Photo({
   altEn,
   className,
   decorative = false,
+  style,
 }: PhotoProps) {
   /* A decorative image carries no meaning, so it gets an empty alt in both
      languages rather than being read out twice. */
@@ -53,6 +56,7 @@ export default function Photo({
         alt={altKm}
         lang="km"
         data-lang="km"
+        style={style}
         loading="lazy"
         decoding="async"
       />
@@ -62,6 +66,7 @@ export default function Photo({
         alt={altEn}
         lang="en"
         data-lang="en"
+        style={style}
         loading="lazy"
         decoding="async"
       />
